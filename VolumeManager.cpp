@@ -213,7 +213,7 @@ void VolumeManager::handleSwitchEvent(NetlinkEvent *evt) {
     }
 
 #ifdef USE_USB_MASS_STORAGE_SWITCH
-    if (!strcmp(name, "usb_mass_storage")) {
+    if (!strcmp(name, "usb_mass_storage") || !strcmp(name, "mass_storage")) {
         if (!strcmp(state, "online"))  {
             notifyUmsConnected(true);
         } else {
@@ -249,7 +249,7 @@ void VolumeManager::handleUsbCompositeEvent(NetlinkEvent *evt) {
         return;
     }
 
-    if (!strcmp(function, "usb_mass_storage")) {
+    if (!strcmp(function, "usb_mass_storage") || !strcmp(function, "mass_storage")) {
         bool oldAvailable = massStorageAvailable();
         mUsbMassStorageEnabled = !strcmp(enabled, "1");
         SLOGD("usb_mass_storage function %s", mUsbMassStorageEnabled ? "enabled" : "disabled");
